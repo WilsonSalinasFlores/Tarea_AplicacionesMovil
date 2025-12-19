@@ -1,20 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Clima App</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item lines="outline" class="ion-margin-bottom">
+    <ion-label position="floating">Ingresa una ciudad</ion-label>
+    <ion-input [(ngModel)]="nombreCiudad"></ion-input>
+  </ion-item>
+  
+  <ion-button expand="block" (click)="searchWeather()">
+    Consultar Clima
+  </ion-button>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-card class="weather-card" *ngIf="weatherData">
+  <ion-card-header>
+    <div class="header-content">
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-card-title>{{ weatherData.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ weatherData.pais }}</ion-card-subtitle>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content>
+    <div class="main-info">
+      <div class="temp-box">
+        <span class="degrees">{{ weatherData.temp | number:'1.0-0' }}</span>
+        <span class="unit">°C</span>
+      </div>
+      <p class="description">{{ weatherData.descripcion | titlecase }}</p>
+    </div>
+
+
+
+    <div class="detail-item" *ngIf="weatherData.humedad !== null">
+      <ion-icon name="water-outline"></ion-icon>
+      <div class="detail-text">
+        <span>{{ weatherData.humedad }}%</span>
+        <small>  Humedad</small>
+      </div>
+    </div>
+    <div class="detail-item" *ngIf="weatherData.viento !== null">
+      <ion-icon name="speedometer-outline"></ion-icon>
+      <div class="detail-text">
+        <span>{{ weatherData.viento }}</span>
+        <small> Viento</small>
+      </div>
+    </div>
+
+  </ion-card-content>
+</ion-card>
 </ion-content>

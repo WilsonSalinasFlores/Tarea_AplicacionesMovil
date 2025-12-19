@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Contactos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="cards-container">
+    <ion-card *ngFor="let persona of personas" [color]="persona.color">
+      <ion-card-header>
+        <ion-card-title>{{ persona.nombre }}</ion-card-title>
+        <ion-card-subtitle>{{ persona.profesion }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><ion-icon name="mail" slot="start"></ion-icon> {{ persona.email }}</p>
+        <p><ion-icon name="call" slot="start"></ion-icon> {{ persona.telefono }}</p>
+        <ion-button expand="block" fill="solid" color="light" (click)="mostrarToast(persona.nombre)">Contactar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
